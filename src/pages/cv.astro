@@ -1,6 +1,6 @@
 ---
 import PageLayout from "@layouts/PageLayout.astro";
-import { education, experience, profile } from "../data/profile";
+import { education, profile } from "../data/profile";
 
 const research = [
   {
@@ -91,6 +91,44 @@ const researchProjects = [
     ],
   },
 ];
+
+const workExperience = [
+  {
+    company: "UpSite Clinical, Inc.",
+    role: "Software Engineer Intern",
+    place: "Tiburon, CA",
+    date: "May — Aug 2025",
+    bullets: [
+      "Developed Kafka-based messaging infrastructure through Git collaboration to support communication across key components of the company’s software pipeline.",
+      "Constructed a Python messaging flow with confluent-kafka, Protobuf, Schema Registry, a dead-letter queue for fault tolerance, and traceable logs for observability.",
+      "Deployed Kafka to AWS using MSK and EC2, configuring IAM authentication and VPC networking for reliable message streaming.",
+      "Enabled stable handling of more than 10,000 messages per minute with near-zero message loss under load.",
+    ],
+  },
+  {
+    company: "Hoperun Technology Corp.",
+    role: "Machine Learning Intern",
+    place: "Nanjing, China",
+    date: "Jun — Aug 2024",
+    bullets: [
+      "Constructed an automated inspection system to identify missing welding points on electronic boards, highlight defective regions, and quantify defect proportions for quality-control workflows.",
+      "Created a labeled dataset by annotating X-ray images with LabelMe, standardizing defect categories, and cleaning inconsistent samples.",
+      "Designed a pipeline combining YOLOv8 for board localization with PaddleSeg for pixel-level segmentation of missing welds.",
+      "Achieved 0.78 IoU on production samples and supported deployment to the client’s assembly line.",
+    ],
+  },
+  {
+    company: "The Chinese University of Hong Kong, Shenzhen",
+    role: "Teaching Assistant · Database Management",
+    place: "Shenzhen, China",
+    date: "Feb — May 2024",
+    bullets: [
+      "Led tutorial sessions on relational database design, SQL query optimization, and transaction management.",
+      "Held weekly office hours to answer questions, provide individual guidance, and clarify course material.",
+      "Assisted with grading programming assignments and written homework, providing timely and accurate feedback.",
+    ],
+  },
+];
 ---
 
 <PageLayout title="CV" description="Curriculum vitae of Mingrui Liang.">
@@ -142,9 +180,13 @@ const researchProjects = [
 
     <section class="cv-section">
       <h2>Industry & teaching</h2>
-      {experience.map(item => <article class="cv-row">
-        <div><h3>{item.role}</h3><p>{item.company}</p><p class="muted">{item.text}</p></div>
-        <div class="cv-date">{item.date}</div>
+      {workExperience.map(item => <article class="cv-detail-row">
+        <div>
+          <h3>{item.company}</h3>
+          <p class="cv-meta">{item.role}</p>
+          <ul>{item.bullets.map(bullet => <li>{bullet}</li>)}</ul>
+        </div>
+        <div class="cv-date"><strong>{item.place}</strong><br />{item.date}</div>
       </article>)}
     </section>
 
