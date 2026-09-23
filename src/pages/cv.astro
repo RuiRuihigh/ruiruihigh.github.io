@@ -1,0 +1,50 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+import { education, experience, profile, projects } from "../data/profile";
+---
+
+<PageLayout title="CV" description="Curriculum vitae of Mingrui Liang.">
+  <section class="shell section standalone cv-page">
+    <div class="cv-heading">
+      <div>
+        <p class="eyebrow">Curriculum vitae</p>
+        <h1>Mingrui Liang.</h1>
+        <p>Speech generation · Audio-language understanding · Audio security</p>
+      </div>
+      <div class="cv-contact">
+        <a href={`mailto:${profile.email}`}>{profile.email}</a>
+        <a href={profile.scholar}>Google Scholar ↗</a>
+        <a href={profile.github}>GitHub ↗</a>
+      </div>
+    </div>
+
+    <section class="cv-section">
+      <h2>Education</h2>
+      {education.map(item => <article class="cv-row">
+        <div><h3>{item.school}</h3><p>{item.degree}</p><p class="muted">{item.detail}</p></div>
+        <div class="cv-date">{item.date}<br />{item.place}</div>
+      </article>)}
+    </section>
+
+    <section class="cv-section">
+      <h2>Selected research</h2>
+      {projects.map(item => <article class="cv-row">
+        <div><h3>{item.title}</h3><p>{item.institution} · With {item.supervisor}</p><p class="muted">{item.text}</p></div>
+        <div class="cv-date">{item.period}</div>
+      </article>)}
+    </section>
+
+    <section class="cv-section">
+      <h2>Industry & teaching</h2>
+      {experience.map(item => <article class="cv-row">
+        <div><h3>{item.role}</h3><p>{item.company}</p><p class="muted">{item.text}</p></div>
+        <div class="cv-date">{item.date}</div>
+      </article>)}
+    </section>
+
+    <section class="cv-section">
+      <h2>Skills</h2>
+      <p>Python, C++, MATLAB, R, JavaScript, SQL, CUDA · PyTorch, TensorFlow, Slurm, AWS, Kafka</p>
+    </section>
+  </section>
+</PageLayout>

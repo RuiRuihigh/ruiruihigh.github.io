@@ -1,89 +1,38 @@
-![Astro Sphere Lighthouse Score](_astrosphere.jpg)
+# Mingrui Liang — Personal website
 
-Astro Sphere is a static, minimalist, lightweight, lightning fast portfolio and blog theme based on my personal website.
+Personal academic website based on [Astro Sphere](https://github.com/markhorn-dev/astro-sphere) by Mark Horn (MIT). The original license is retained in `LICENSE`.
 
-It is primarily Astro, Tailwind and Typescript, with a very small amount of SolidJS for stateful components.
+## Local development
 
-## 🚀 Deploy your own
+Use Node.js 22 and npm:
 
-[![Deploy with Vercel](_deploy_vercel.svg)](https://vercel.com/new/clone?repository-url=https://github.com/markhorn-dev/astro-sphere)  [![Deploy with Netlify](_deploy_netlify.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/markhorn-dev/astro-sphere)
+```sh
+npm ci
+npm run dev
+npm run build
+```
 
-## 📋 Features
+## Update content
 
-- ✅ 100/100 Lighthouse performance
-- ✅ Responsive
-- ✅ Accessible
-- ✅ SEO-friendly
-- ✅ Typesafe
-- ✅ Minimal style
-- ✅ Light/Dark Theme
-- ✅ Animated UI
-- ✅ Tailwind styling
-- ✅ Auto generated sitemap
-- ✅ Auto generated RSS Feed
-- ✅ Markdown support
-- ✅ MDX Support (components in your markdown)
-- ✅ Searchable content (posts and projects)
-- ✅ Code Blocks - copy to clipboard
+- Publications, education, projects, and experience: `src/data/profile.ts`
+- Biography and homepage: `src/pages/index.astro`
+- Styles: `src/styles/global.css`
+- Public CV: `src/pages/cv.astro` (the source PDF is used only as reference and is not published)
+- Portrait: `public/portrait.jpg`
 
-## 💯 Lighthouse score
-![Astro Sphere Lighthouse Score](_lighthouse.png)
+## Publishing
 
-## 🕊️ Lightweight
-All pages under 100kb (including fonts)
+The `Deploy website` GitHub Actions workflow builds and deploys the site to GitHub Pages on every push to `main`.
 
-## ⚡︎ Fast
-Rendered in ~40ms on localhost
+## Content sources
 
-## 📄 Configuration
+Owner-provided CV and portrait. Publication metadata checked against the owner's Google Scholar profile and arXiv on September 23, 2026.
 
-The blog posts on the demo serve as the documentation and configuration.
+- https://scholar.google.com/citations?user=L3XEWtwAAAAJ
+- https://arxiv.org/abs/2607.23961 (SPSC 2026 accepted)
+- https://arxiv.org/abs/2608.27176 (preprint)
+- https://arxiv.org/abs/2512.14687 (preprint; first three authors contributed equally)
 
-## 💻 Commands
+Dates and research descriptions follow the supplied CV. The Spoken DialogSum title follows the public preprint; the CV describes a later submission title.
 
-All commands are run from the root of the project, from a terminal:
-
-Replace npm with your package manager of choice. `npm`, `pnpm`, `yarn`, `bun`, etc
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run dev:network`     | Starts dev server on local network               |
-| `npm run sync`            | Generates TypeScript types for all Astro modules.|
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run preview:network` | Starts preview server on local network           |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-| `npm run lint`            | Run ESLint                                       |
-| `npm run lint:fix`        | Auto-fix ESLint issues                           |
-
-## 🗺️ Roadmap
-
-A few features I plan to implement
-- ⬜ Article Pages - Table of Contents
-- ⬜ Article Pages - Share on social media
-
-## ✨ Acknowledgement
-
-Theme inspired by [Paco Coursey](https://paco.me/), [Lee Robinson](https://leerob.io/) and [Hayden Bleasel](https://www.haydenbleasel.com/)
-
-
-## 🏛️ License
-
-MIT
-
-
-# 1.0.1 Update
-
-Added ability to run dev and preview on local network.
-added npm run dev:network
-added npm run preview:network
-
-Added slightly more particle density in both light and dark mode.
-
-Added subtle dark mode star and meteor animations.
-
-Removed eslint config
-
+The original Spoken DialogSum audio demo returned HTTP 404 when checked; the website links to its paper instead.

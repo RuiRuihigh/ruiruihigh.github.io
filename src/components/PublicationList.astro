@@ -1,0 +1,15 @@
+---
+import {publications} from "../data/profile";
+---
+<div class="paper-list">
+ {publications.map((paper, index) => <article class="paper" id={paper.id}>
+  <div class="paper-index">0{index + 1}</div>
+  <div class="paper-body">
+   <div class="paper-meta"><span class:list={["venue", {accepted: paper.id === "deepfake"}]}>{paper.label}</span><span>{paper.topic}</span></div>
+   <h3><a href={paper.url}>{paper.title}</a></h3>
+   <p class="authors">{paper.authors.map((author,i) => <>{i > 0 ? ", " : ""}{author.startsWith("Mingrui Liang") ? <strong>{author}</strong> : author}</>)}</p>
+   <p class="paper-summary">{paper.summary}</p>
+   <div class="paper-links"><a href={paper.url}>Paper <span aria-hidden="true">↗</span></a><a href={paper.pdf}>PDF</a>{paper.links.map(link => <a href={link.url}>{link.label} <span aria-hidden="true">↗</span></a>)}{paper.equal && <span class="equal">* Equal contribution</span>}</div>
+  </div>
+ </article>)}
+</div>
