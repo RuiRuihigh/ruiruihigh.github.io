@@ -1,0 +1,25 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+---
+
+<PageLayout title="Singing Voice Conversion Demo" description="Video demonstration of Mingrui Liang's interactive singing voice conversion project.">
+  <section class="shell section standalone demo-page">
+    <p class="eyebrow">Project demo</p>
+    <h1>Singing voice conversion.</h1>
+    <p class="demo-intro">An interactive demonstration of diffusion-based singing voice conversion and its intermediate representations.</p>
+    <div class="video-frame">
+      <video controls playsinline preload="metadata">
+        <source src="/media/singing-voice-conversion-demo.mp4" type="video/mp4" />
+        Your browser does not support HTML5 video.
+      </video>
+    </div>
+    <a class="text-link" href="/media/singing-voice-conversion-demo.mp4">Open video directly ↗</a>
+  </section>
+</PageLayout>
+
+<style>
+  .demo-page h1 { font-size: clamp(42px, 5vw, 68px); margin-bottom: 20px; }
+  .demo-intro { max-width: 760px; color: var(--muted); font-size: 18px; }
+  .video-frame { margin: 38px 0 24px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: #000; }
+  video { display: block; width: 100%; max-height: 78vh; background: #000; }
+</style>
