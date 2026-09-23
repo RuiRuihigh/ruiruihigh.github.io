@@ -38,10 +38,10 @@ import { profile, projects, education, experience } from "../data/profile";
   <div class="section-heading"><div><p class="eyebrow">03 / Selected projects</p><h2 id="projects-title">From models to sound.</h2></div></div>
   <div class="project-grid">{projects.map((project, i) => <article class="project-card">
    <div class="project-top"><span class="project-number">0{i+1}</span><span>{project.period}</span></div>
-   <h3>{project.title}</h3><p class="project-institution">{project.institution}<br/><span>With {project.supervisor}</span></p><p>{project.text}</p>
+   <h3>{project.title}</h3><p class="project-institution">{project.institution}{project.supervisor && <><br/><span>With {project.supervisor}</span></>}</p><p>{project.text}</p>
    <div class="project-result">{project.result}</div>
    <div class="project-tags">{project.tags.map(tag => <span>{tag}</span>)}</div>
-   <a class="text-link" href={project.url}>{project.linkLabel} ↗</a>
+   {project.url && project.linkLabel && <a class="text-link" href={project.url}>{project.linkLabel} ↗</a>}
   </article>)}</div>
  </section>
  <section class="section shell" id="experience" aria-labelledby="experience-title">
