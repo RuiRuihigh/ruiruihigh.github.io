@@ -1,6 +1,96 @@
 ---
 import PageLayout from "@layouts/PageLayout.astro";
-import { education, experience, profile, projects } from "../data/profile";
+import { education, experience, profile } from "../data/profile";
+
+const research = [
+  {
+    title: "Datasets-Aware Audio Deepfake Detection",
+    meta: "Johns Hopkins University · With Najim Dehak and Jesús Villalba",
+    date: "Sep 2025 — Jun 2026",
+    link: "https://arxiv.org/abs/2607.23961",
+    bullets: [
+      "Developed a robust synthetic-speech detection system for the 2025 Speech Deepfake Arena.",
+      "Built a 7,000+ hour training corpus from heterogeneous datasets and introduced dataset-source identity as auxiliary supervision.",
+      "Combined Wav2Vec2 and ECAPA-TDNN representations with multitask learning and gradient reversal to improve cross-dataset generalization.",
+      "Achieved 8.238% average EER and third place in the open-license-only track; the resulting paper was accepted to SPSC 2026.",
+    ],
+  },
+  {
+    title: "Audio-Grounded Reasoning under Transcript–Speech Inconsistency",
+    meta: "Johns Hopkins University · With Najim Dehak and Jesús Villalba",
+    date: "2026",
+    link: "https://arxiv.org/abs/2608.27176",
+    bullets: [
+      "Studied spoken-dialogue cases where lexical transcripts conflict with emotion, prosody, or other acoustic evidence.",
+      "Helped construct ContraTalk, an evaluation setting for measuring whether audio-language models reason from speech rather than text alone.",
+      "Evaluated the Audio Twin framework, which exposes acoustic evidence to improve reasoning when textual cues are misleading.",
+    ],
+  },
+  {
+    title: "Spoken Dialogue Summarization with Emotion-Rich Speech",
+    meta: "Johns Hopkins University · With Najim Dehak and Jesús Villalba",
+    date: "Feb — Jul 2025",
+    link: "https://arxiv.org/abs/2512.14687",
+    bullets: [
+      "Constructed Spoken DialogSum, a resource of 13,460 expressive dialogues paired with factual and emotion-rich summaries.",
+      "Designed a scalable generation pipeline with utterance-level emotion and prosody labels for studying spoken-dialogue understanding.",
+      "Evaluated audio-language models on summarization and paralinguistic understanding, measuring how acoustic cues complement transcripts.",
+      "Released the work as a co-first author together with a public audio-sample demonstration.",
+    ],
+  },
+];
+
+const researchProjects = [
+  {
+    title: "Discrete-Token Speech Language Modeling",
+    meta: "Carnegie Mellon University · With Shinji Watanabe",
+    date: "Jun 2026 — Present",
+    bullets: [
+      "Investigating alternative speech representations and tokenization strategies for discrete-token speech language models.",
+      "Designing controlled comparisons to understand how speech units affect modeling quality, robustness, and downstream behavior.",
+    ],
+  },
+  {
+    title: "Multi-Speaker Speech Synthesis",
+    meta: "Carnegie Mellon University · With Shinji Watanabe",
+    date: "Jun — Jul 2026",
+    bullets: [
+      "Built a multi-speaker TTS pipeline on DailyTalk and benchmarked Tacotron 2 with Griffin–Lim before transitioning to VITS.",
+      "Added speaker-ID conditioning to support multiple speakers in a single model and achieved a 3.79 UTMOS score.",
+      "Contributed the training recipe to ESPnet and released the trained model through the ESPnet Hugging Face repository.",
+    ],
+  },
+  {
+    title: "LLM-Based Speech Recognition",
+    meta: "Johns Hopkins University · With Najim Dehak",
+    date: "Sep — Dec 2025",
+    bullets: [
+      "Built an end-to-end ASR system that connects an audio encoder with an LLM through cross-modal representation alignment.",
+      "Designed staged training with a frozen encoder, Q-Former alignment, and LoRA fine-tuning to reduce representation degradation and forgetting.",
+      "Reached 2.9% WER on LibriSpeech, outperforming the Whisper baseline used for comparison.",
+    ],
+  },
+  {
+    title: "Multimodal Speech Emotion Recognition",
+    meta: "Johns Hopkins University · With Najim Dehak",
+    date: "Sep — Dec 2024",
+    bullets: [
+      "Built a robust multimodal speech emotion recognition system on the MELD dataset.",
+      "Applied MUSAN noise and room impulse response augmentation to improve performance under noisy and reverberant conditions.",
+      "Combined wav2vec 2.0 acoustic features with ASR and BERT text features, comparing concatenation and attention-based fusion methods.",
+      "Achieved 58.9% accuracy across five emotion classes, ranking second among comparable baseline systems.",
+    ],
+  },
+  {
+    title: "Interactive Singing Voice Conversion",
+    meta: "CUHK-Shenzhen · With Zhizheng Wu",
+    date: "May — Sep 2023",
+    bullets: [
+      "Adapted a diffusion-based singing voice conversion model for interactive exploration.",
+      "Built a D3.js interface for inspecting intermediate mel-spectrograms and listening to synthesized audio across diffusion steps.",
+    ],
+  },
+];
 ---
 
 <PageLayout title="CV" description="Curriculum vitae of Mingrui Liang.">
@@ -27,10 +117,26 @@ import { education, experience, profile, projects } from "../data/profile";
     </section>
 
     <section class="cv-section">
-      <h2>Selected research</h2>
-      {projects.map(item => <article class="cv-row">
-        <div><h3>{item.title}</h3><p>{item.institution}{item.supervisor && <> · With {item.supervisor}</>}</p><p class="muted">{item.text}</p></div>
-        <div class="cv-date">{item.period}</div>
+      <h2>Research Experience</h2>
+      {research.map(item => <article class="cv-detail-row">
+        <div>
+          <h3><a href={item.link}>{item.title} ↗</a></h3>
+          <p class="cv-meta">{item.meta}</p>
+          <ul>{item.bullets.map(bullet => <li>{bullet}</li>)}</ul>
+        </div>
+        <div class="cv-date">{item.date}</div>
+      </article>)}
+    </section>
+
+    <section class="cv-section">
+      <h2>Research Projects</h2>
+      {researchProjects.map(item => <article class="cv-detail-row">
+        <div>
+          <h3>{item.title}</h3>
+          <p class="cv-meta">{item.meta}</p>
+          <ul>{item.bullets.map(bullet => <li>{bullet}</li>)}</ul>
+        </div>
+        <div class="cv-date">{item.date}</div>
       </article>)}
     </section>
 
@@ -48,3 +154,17 @@ import { education, experience, profile, projects } from "../data/profile";
     </section>
   </section>
 </PageLayout>
+
+<style>
+  .cv-detail-row { display: grid; grid-template-columns: 1fr 190px; gap: 40px; padding: 28px 0; }
+  .cv-detail-row + .cv-detail-row { border-top: 1px solid var(--line); }
+  .cv-detail-row h3 { font-size: 20px; line-height: 1.4; }
+  .cv-detail-row h3 a:hover { color: var(--accent); }
+  .cv-meta { margin-top: 6px; color: var(--muted); font-size: 15px; }
+  .cv-detail-row ul { margin: 14px 0 0 20px; display: grid; gap: 8px; }
+  .cv-detail-row li { color: var(--muted); font-size: 15px; line-height: 1.55; padding-left: 4px; }
+  @media (max-width: 700px) {
+    .cv-detail-row { grid-template-columns: 1fr; gap: 8px; }
+    .cv-detail-row .cv-date { grid-row: 1; text-align: left; }
+  }
+</style>
