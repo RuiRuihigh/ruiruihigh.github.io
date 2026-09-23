@@ -43,6 +43,6 @@ export const education = [
 ];
 export const experience = [
   { role: "Software Engineer Intern", company: "UpSite Clinical", date: "May — Aug 2025", text: "Built Kafka messaging infrastructure with Protobuf, Schema Registry, and AWS MSK for reliable communication between software services." },
-  { role: "Software Developer Intern", company: "Hoperun Technology", date: "Jun — Aug 2024", text: "Developed a production inspection pipeline using YOLOv8 and PaddleSeg to detect missing welds in X-ray images of electronic boards." },
+  { role: "Machine Learning Intern", company: "Hoperun Technology", date: "Jun — Aug 2024", text: "Developed a production inspection pipeline using YOLOv8 and PaddleSeg to detect missing welds in X-ray images of electronic boards." },
   { role: "Teaching Assistant · Database Management", company: "CUHK-Shenzhen", date: "Feb — May 2024", text: "Led tutorials, held office hours, and supported assessment in relational database design, SQL, and transaction management." },
 ];
