@@ -27,7 +27,7 @@ export const publications = [
     authors: ["Mingrui Liang*", "Yen-Ju Lu*", "Kunxiao Gao*", "Helin Wang", "Thomas Thebaud", "Laureano Moro-Velazquez", "Najim Dehak", "Jesús Villalba"],
     summary: "13,460 expressive dialogues pairing speech with factual and emotion-rich summaries, designed to study how audio-language models understand conversations.",
     url: "https://arxiv.org/abs/2512.14687", pdf: "https://arxiv.org/pdf/2512.14687", equal: true,
-    links: [],
+    links: [{label: "Demo", url: "https://spokendialogsum.github.io/SpokenDialog-Sum-Audio-Samples/"}],
   },
 ];
 export const projects = [
