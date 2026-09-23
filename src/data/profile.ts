@@ -12,7 +12,7 @@ export const publications = [
     authors: ["Mingrui Liang", "Thomas Thebaud", "Lukasz Wojciak", "Laureano Moro Velazquez", "Yishay Carmiel", "Jesus Villalba Lopez", "Najim Dehak"],
     summary: "Using dataset identity as supervision to improve audio deepfake detection across heterogeneous datasets, through multitask learning and gradient reversal.",
     url: "https://arxiv.org/abs/2607.23961", pdf: "https://arxiv.org/pdf/2607.23961", equal: false,
-    links: [{label: "Code", url: "https://github.com/RuiRuihigh/hyperion-deepfake-multitask"}],
+    links: [{label: "Code", url: "https://github.com/RuiRuihigh/hyperion-deepfake-multitask/tree/deepfake-multitask-grl/egs/deepfake_detect"}],
   },
   {
     id: "contratalk", year: 2026, label: "arXiv 2026 · Preprint", topic: "Audio-grounded reasoning",
