@@ -3,6 +3,7 @@ export const profile = {
   email: "mliang17@jh.edu",
   cvUrl: "/cv/",
   github: "https://github.com/RuiRuihigh",
+  linkedin: "https://www.linkedin.com/in/mingrui-liang-558abb328/",
   scholar: "https://scholar.google.com/citations?user=L3XEWtwAAAAJ&hl=en",
 };
 export const publications = [
