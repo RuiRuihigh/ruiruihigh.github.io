@@ -1,0 +1,23 @@
+---
+import PageLayout from '@layouts/PageLayout.astro';
+---
+<PageLayout title="Privacy" description="How shared-link visit statistics work on Mingrui Liang’s website.">
+  <section class="shell privacy">
+    <p class="eyebrow">Privacy</p><h1>Shared-link visit statistics</h1>
+    <p>Some links shared by Mingrui include a random referral code. When you open one, this website can record the link used, the page visited, and the time of the visit. A link’s private label is visible only to Mingrui. A forwarded link still carries the same attribution; these records do not verify a visitor’s identity.</p>
+    <p>Visits are recorded after the page has been visible for about five seconds. Repeated views of the same page in the same browser-tab session are counted at most once per 30-minute interval. Attribution is stored in session storage and expires after 30 minutes of inactivity. Ordinary visits without an attributed session are not recorded by this feature.</p>
+    <p>The application does not store IP addresses, precise locations, device fingerprints, or browsing activity outside this site. Records are stored with Cloudflare and automatically removed after 90 days. GitHub and Cloudflare may process technical request information as part of their hosting services.</p>
+    <p>You can disable this feature below. The preference is saved in this browser. Do Not Track and Global Privacy Control signals are also respected.</p>
+    <button id="privacy-toggle" type="button">Disable shared-link statistics</button><p id="privacy-status" role="status"></p>
+  </section>
+</PageLayout>
+<script>
+  const button = document.getElementById('privacy-toggle') as HTMLButtonElement;
+  const status = document.getElementById('privacy-status')!;
+  function render() {
+    try { const off = localStorage.getItem('ml-analytics-optout') === '1'; button.textContent = off ? 'Allow shared-link statistics' : 'Disable shared-link statistics'; status.textContent = off ? 'Shared-link statistics are disabled in this browser.' : 'Shared-link statistics are allowed unless your browser sends a privacy signal.'; }
+    catch { button.disabled = true; status.textContent = 'Browser storage is unavailable. Shared-link statistics are disabled.'; }
+  }
+  button.addEventListener('click', () => { try { localStorage.setItem('ml-analytics-optout', localStorage.getItem('ml-analytics-optout') === '1' ? '0' : '1'); sessionStorage.removeItem('ml-link-session'); render(); } catch { render(); } }); render();
+</script>
+<style>.privacy{max-width:900px;padding-block:100px}.privacy h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.15;margin-bottom:2rem}.privacy p{line-height:1.8;margin:1.5rem 0}.privacy button{padding:14px 20px;border:1px solid currentColor;border-radius:8px;font:inherit;cursor:pointer}</style>

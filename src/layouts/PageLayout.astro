@@ -2,7 +2,8 @@
 import "@styles/global.css";
 import BaseHead from "@components/BaseHead.astro";
 import Header from "@components/Header.astro";
+import LinkAnalytics from "@components/LinkAnalytics.astro";
 import Footer from "@components/Footer.astro";
 const { title, description } = Astro.props;
 ---
-<!doctype html><html lang="en" class="dark"><head><BaseHead title={title === "Home" ? "Mingrui Liang | Speech & Audio Research" : `${title} | Mingrui Liang`} description={description}/></head><body><a href="#main" class="skip-link">Skip to content</a><Header/><main id="main"><slot/></main><Footer/></body></html>
+<!doctype html><html lang="en" class="dark"><head><BaseHead title={title === "Home" ? "Mingrui Liang | Speech & Audio Research" : `${title} | Mingrui Liang`} description={description}/></head><body><a href="#main" class="skip-link">Skip to content</a><Header/><main id="main"><slot/></main><Footer/><LinkAnalytics/></body></html>

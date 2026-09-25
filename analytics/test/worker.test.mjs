@@ -1,0 +1,15 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import worker, { authenticated, sign, validEvent } from '../src/worker.mjs';
+const secret='test-secret-not-used-in-production-123456789';
+const origin='https://analytics.example';
+const env={ADMIN_SECRET:secret,SITE_ORIGIN:'https://ruiruihigh.github.io',DB:{prepare(){throw Error('Database should not be touched');}}};
+const req=(path,options={})=>new Request(origin+path,options);
+test('private records require authentication',async()=>{assert.equal((await worker.fetch(req('/api/links'),env)).status,401);assert.equal((await worker.fetch(req('/api/links/'+'a'.repeat(32)+'/visits'),env)).status,401);});
+test('admin mutations reject cross-site and missing origin',async()=>{for(const headers of [{},{Origin:'https://evil.example'}])assert.equal((await worker.fetch(req('/api/login',{method:'POST',headers,body:'{}'}),env)).status,403);});
+test('signed admin sessions reject expiry and tampering',async()=>{const now=Date.now();const expiry=String(now+10000);const signature=await sign('admin:'+expiry,secret);const request=req('/api/links',{headers:{Cookie:`__Host-mladmin=${expiry}.${signature}`}});assert.equal(await authenticated(request,env,now),true);assert.equal(await authenticated(request,env,now+20000),false);assert.equal(await authenticated(request,{ADMIN_SECRET:secret+'x'},now),false);});
+test('collection rejects foreign origins and invalid payloads',async()=>{assert.equal((await worker.fetch(req('/collect',{method:'POST',headers:{Origin:'https://evil.example'},body:'{}'}),env)).status,403);assert.equal((await worker.fetch(req('/collect',{method:'POST',headers:{Origin:env.SITE_ORIGIN},body:'{}'}),env)).status,400);});
+test('only approved page paths and random codes accepted',()=>{const v={code:'a'.repeat(32),path:'/',session:'b'.repeat(32)};assert.ok(validEvent(v));assert.ok(!validEvent({...v,path:'https://evil.example'}));assert.ok(!validEvent({...v,code:'Alice'}));assert.ok(!validEvent({...v,session:'someone@example.com'}));});
+test('previews do not write visits',async()=>{const res=await worker.fetch(req('/collect',{method:'POST',headers:{Origin:env.SITE_ORIGIN,'User-Agent':'Slackbot-LinkExpanding'},body:'{}'}),env);assert.equal(res.status,204);});
+test('inactive links do not write visits',async()=>{const res=await worker.fetch(req('/collect',{method:'POST',headers:{Origin:env.SITE_ORIGIN},body:JSON.stringify({code:'a'.repeat(32),path:'/',session:'b'.repeat(32)})}),{...env,DB:{prepare(){return {bind(){return {first:async()=>null}}}}}});assert.equal(res.status,204);});
+test('security headers and missing secret fail closed',async()=>{const res=await worker.fetch(req('/admin'),env);assert.equal(res.headers.get('X-Frame-Options'),'DENY');assert.equal(res.headers.get('X-Robots-Tag'),'noindex, nofollow');assert.equal((await worker.fetch(req('/api/links'),{...env,ADMIN_SECRET:''})).status,503);});

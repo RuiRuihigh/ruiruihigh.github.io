@@ -1,0 +1,11 @@
+{
+  "name": "mingrui-link-analytics",
+  "main": "src/worker.mjs",
+  "compatibility_date": "2026-09-25",
+  "account_id": "427f841ce45cc5893e3a2e0cdca3427c",
+  "workers_dev": true,
+  "observability": {"enabled": false},
+  "vars": {"SITE_ORIGIN": "https://ruiruihigh.github.io"},
+  "triggers": {"crons": ["0 3 * * *"]},
+  "d1_databases": [{"binding": "DB", "database_name": "mingrui-link-analytics", "database_id": "951a8ef4-92d5-4f46-b9e9-c81d34328dc4", "migrations_dir": "migrations"}]
+}
